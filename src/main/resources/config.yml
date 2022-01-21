@@ -1,0 +1,35 @@
+Prefix: "&e[&brSpectate&e]"
+
+Spectate:
+  On_message: "&aYou are now in spectate mode"
+  Off_message: "&cYou are no longer in spectate mode"
+
+# CHATCOLOR CODES
+# &0 Black
+# &1 Dark Blue
+# &2 Dark Green
+# &3 Dark Aqua
+# &4 Dark Red
+# &5 Dark Purple
+# &6 Gold
+# &7 Gray
+# &8 Dark Gray
+# &9 Blue
+# &a Green
+# &b Aqua
+# &c Red
+# &d Light Purple
+# &e Yellow
+# &f White
+
+###############################################################
+#IF USING THESE MAKE SURE TO USE ALWAYS USE COLOR BEFORE
+# THIS WORKS &b&l
+# THIS DOES NOT WORK &l&b
+###############################################################
+# &k Obfuscated
+# &l Bold
+# &m Strikethrough
+# &n Underline
+# &o Italic
+# &r Reset the default color

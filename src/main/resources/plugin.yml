@@ -1,0 +1,17 @@
+name: rSpectate
+version: '${project.version}'
+main: me.r0p3.rspectate.RSpectate
+api-version: 1.18
+authors: [ r0p3 ]
+description: Lets players use spectate but will be teleported back when they are done
+
+commands:
+  rspectate:
+    description: Toggle spectate mode for player
+    usage: /<command>
+    permission: rspectate.spectate
+    permission-message: &cYou do not have the required permission for this command
+permissions:
+  rspectate.spectate:
+    description: Toggle spectate mode
+    default: true
