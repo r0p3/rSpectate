@@ -21,7 +21,14 @@ public class PlayerMessages
         }
     }
 
-    private static String convertColor(String text)
+    public static void sendCustomMessage(Player player, String message)
+    {
+        Plugin plugin = RSpectate.getPlugin(RSpectate.class);
+        plugin.reloadConfig();
+        player.sendMessage(convertColor(plugin.getConfig().getString("Prefix") + " " + message));
+    }
+
+    public static String convertColor(String text)
     {
         if(text.length() == 0)
             return text;

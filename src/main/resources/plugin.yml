@@ -10,8 +10,14 @@ commands:
     description: Toggle spectate mode for player
     usage: /<command>
     permission: rspectate.spectate
-    permission-message: &cYou do not have the required permission for this command
+    permission-message: §cYou do not have the required permission for this command
 permissions:
   rspectate.spectate:
     description: Toggle spectate mode
+    default: true
+  rspectate.spectatetoggleother:
+    description: Toggle spectate mode for other players
+    default: false
+  rspectate.spectateteleport:
+    description: Allow players to teleport to other players while in spectate mode
     default: true

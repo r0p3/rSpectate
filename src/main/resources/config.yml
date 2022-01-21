@@ -1,8 +1,16 @@
+#Prefix for all chat messages from this plugin
 Prefix: "&e[&brSpectate&e]"
 
 Spectate:
+
+  #Message to player when enabling spectate mode
   On_message: "&aYou are now in spectate mode"
+
+  #Message to player when disabling spectate mode
   Off_message: "&cYou are no longer in spectate mode"
+
+  #How many seconds a player can be in spectate mode, put 0 for unlimited time
+  Timer: 0
 
 # CHATCOLOR CODES
 # &0 Black

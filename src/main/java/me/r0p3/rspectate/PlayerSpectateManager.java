@@ -4,17 +4,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 public class PlayerSpectateManager
 {
-    public static void startSpectate(Player player)
+    public static void startSpectate(Player player, String message)
     {
         try
         {
-
-
             String playerID = player.getUniqueId().toString();
             Location location = player.getLocation();
+            Plugin plugin = RSpectate.getPlugin(RSpectate.class);
+            plugin.reloadConfig();
 
             FileManager.getConfig().createSection(playerID);
             FileManager.getConfig().set(playerID + ".X", location.getX());
@@ -24,10 +25,25 @@ public class PlayerSpectateManager
             FileManager.getConfig().set(playerID + ".Pitch", location.getPitch());
             FileManager.getConfig().set(playerID + ".World", location.getWorld().getName());
             FileManager.getConfig().set(playerID + ".Gamemode", player.getGameMode().toString());
+            FileManager.getConfig().set(playerID + ".Timer", plugin.getConfig().getInt("Spectate.Timer"));
             player.setGameMode(GameMode.SPECTATOR);
 
             FileManager.save();
-            PlayerMessages.sendMessage(player, "Spectate.On_message");
+
+            if(message == "")
+                PlayerMessages.sendMessage(player, "Spectate.On_message");
+            else
+                PlayerMessages.sendCustomMessage(player, message);
+
+            if(plugin.getConfig().getInt("Spectate.Timer") > 0)
+            Bukkit.getScheduler().runTaskLater(plugin, new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    endSpectate(player, "");
+                }
+            },(long) plugin.getConfig().getInt("Spectate.Timer") * 20);
         }
         catch (Exception e)
         {
@@ -35,9 +51,8 @@ public class PlayerSpectateManager
         }
     }
 
-    public static void endSpectate(Player player)
+    public static void endSpectate(Player player, String message)
     {
-
         String playerID = player.getUniqueId().toString();
         Location location;
 
@@ -58,6 +73,14 @@ public class PlayerSpectateManager
         FileManager.getConfig().set(playerID, null);
 
         FileManager.save();
-        PlayerMessages.sendMessage(player, "Spectate.Off_message");
+        if(message == "")
+            PlayerMessages.sendMessage(player, "Spectate.Off_message");
+        else
+            PlayerMessages.sendCustomMessage(player, message);
+    }
+
+    public static boolean isSpectating(Player player)
+    {
+        return (FileManager.getConfig().get(player.getUniqueId().toString()) != null);
     }
 }
